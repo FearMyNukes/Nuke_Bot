@@ -1,0 +1,32 @@
+const { Command } = require('discord.js-commando')
+const { RichEmbed } = require('discord.js')
+
+import Client from index.js
+// Requires Manager from discord-reaction-role
+const ReactionRoleManager = require("discord-reaction-role");
+// Starts updating currents reaction roles
+const manager = new ReactionRoleManager(client, {
+    storage: "./reaction-role.json"
+});
+
+module.exports = class addRoleCommand extends Command {
+    constructor(client) {
+        super(client, {
+            name:"rr",
+            aliases: ["react-role", "rrole"],
+            group: 'moderation',
+            memberName: 'rr',
+            description: 'makes a reaction message which adds roles to users. To do it type *rr [message ID], [emoji], [role ID]',
+        })
+    }
+    run(msg, { user }) {
+        var userMessage = message.content.slice(4, ", ")
+        this.ReactionRoleManager.create({
+            messageID: userMessage[1],
+            channel: message.channel,
+            reaction: userMessage[2],
+            role: userMessage[3],
+        })
+    //channel.messages.fetch(messageId).react("👍");
+        }
+}
