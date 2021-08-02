@@ -24,6 +24,8 @@ A few new functions that this bot supports are:
     
   * Miscellaneous:
     * avatar- Shows your user profile picture with your name if no user is specified it defaults to the sender; Example: \*avatar
+    * kill- used to give a minecraft death message of another server member 
+
 
 ***Support*** join the official Nuke_bot server at _https://discord.gg/7A4EhSCAs2_
 
