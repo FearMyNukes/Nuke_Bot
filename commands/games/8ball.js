@@ -23,8 +23,8 @@ function getAnswer(){
     'Yes',
     'Yes, definitely',
     'You may rely on it',
-    'Cock & Ball Torture',
-    'Definately',
+    'I am unsure',
+    'Definitly',
     'Can pigs fly?']
 
     return answers[Math.floor(Math.random() * 22)];
@@ -34,16 +34,17 @@ module.exports = class eightball extends Command {
     constructor(client) {
         super(client, {
             name:"8ball",
-            aliases: ["8 ball"],
+            aliases: ["8ball"],
             group: 'games',
             memberName: '8ball',
-            description: 'Gives random answers to questions asked.',
+            description: 'Gives answers to questions asked.',
         })
     }
 
     run(msg, { user }) {
         let embed = new MessageEmbed()
-            .setTitle(getAnswer())
+            .setTitle(msg.content.slice(7))
+            .setDescription(getAnswer())
             .setColor("RANDOM")
         msg.embed(embed)
     

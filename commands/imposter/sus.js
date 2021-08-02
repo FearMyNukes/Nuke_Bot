@@ -49,7 +49,7 @@ function getGif(){
     return answers[Math.floor(Math.random() * 40)];
 }
 
-module.exports = class eightball extends Command {
+module.exports = class sus extends Command {
     constructor(client) {
         super(client, {
             name:"sus",
