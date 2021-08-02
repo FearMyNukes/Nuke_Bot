@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js')
 
 
 function getDeathMessage(player, sender){
-    switch(Math.floor(Math.random() * 30)){
+    switch(Math.floor(Math.random() * 45)){
         case 0:
             return( player + " was shot by " + sender);
             break;
@@ -97,6 +97,52 @@ function getDeathMessage(player, sender){
         case 30:
             return ( player + " fell out of the world");
             break;
+        case 31:
+            return ( player + " tried to swim in lava");
+            break;
+        case 32:
+            return ( player + " tried to swim in lava to escape " + sender);
+            break;
+        case 33:
+            return ( player + " discovered the floor was lava");
+            break;
+        case 34:
+            return ( player + " walked into danger zone due to " + sender);
+            break;
+        case 35:
+            return ( player + " was killed by magic");
+            break;
+        case 36:
+            return ( player + " was killed by witch using magic");
+            break;
+        case 37:
+            return ( player + " froze to death");
+            break;
+        case 38:
+            return ( player + " was slain by " + sender);
+            break;
+        case 39:
+            return ( player + " was fireballed to death by " + sender);
+            break;
+        case 40:
+            return ( player + " was stung to death");
+            break;
+        case 41:
+            return ( player + " starved to death");
+            break;
+        case 42:
+            return ( player + " suffocated in a wall");
+            break;
+        case 43:
+            return ( player + " was poked to death by a sweet berry bush");
+            break;
+        case 44:
+            return ( sender + " was killed trying to hurt " + player);
+            break;
+        case 45:
+            return ( sender + " withered away")
+            break;
+
 
     }
     return(player + sender);
@@ -124,7 +170,7 @@ module.exports = class kill extends Command {
     run(msg, { user }) {
         var killer = msg.author;
         let embed = new MessageEmbed()
-            .setTitle(getDeathMessage(`${user.tag}`.slice(0, -5), `${killer.tag}`))
+            .setTitle(getDeathMessage(`${user.tag}`.slice(0, -5), `${killer.tag}`.slice(0, -5)))
             .setColor("RANDOM")
         msg.embed(embed)
     
