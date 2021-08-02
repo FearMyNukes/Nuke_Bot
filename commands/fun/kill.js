@@ -41,7 +41,7 @@ function getDeathMessage(player, sender){
             return (player + " was blown up by " + sender);
             break;
         case 12:
-            return (player + " was blown up by [Intentional Game Design");
+            return (player + " was blown up by [Intentional Game Design]");
             break;
         case 13:
             return (player + " hit the ground too hard");
