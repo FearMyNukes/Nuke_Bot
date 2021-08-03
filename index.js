@@ -1,9 +1,14 @@
 const { Client } = require('discord.js-commando')
 const path = require('path')
+const mongoCurrency = require('discord-mongo-currency');
+const config = require('./settings.json'); //setup this in the future buut basically it calls with config.token etc etc etc
+
+mongoCurrency.connect(config.dbCONNECT);
 
 const client = new Client({
-    commandPrefix: '*',
-    owner: ['476060721575362570'], // can be an array of ids like: owner: ["id", "id"] 
+    //commandPrefix: '*',
+    commandPrefix: '$',
+    //owner: ['476060721575362570'], // can be an array of ids like: owner: ["id", "id"] -
     invite: 'https://discord.gg/QUtyJyyD',
     unknownCommandResponse: false,
 })
@@ -17,7 +22,8 @@ client.registry
     ['moderation', 'Moderation'],
     ['games', 'Games'],
     ['fun', 'Fun'],
-    ['imposter', 'Imposter']
+    ['imposter', 'Imposter'],
+    ['economy', 'economy']
 
 ])
 .registerDefaultGroups()
@@ -33,5 +39,5 @@ client.once('ready', () => {
 
 client.on('error', console.error)
 
-
-client.login('NjY2MDU3MjY5OTI2MDM1NDk0.XhuoKw.uEgOHhzfIiqttZpSzACaHw3FAjg')
+client.login(config.devTOKEN)
+//client.login(config.mainTOKEN)

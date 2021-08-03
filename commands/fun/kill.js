@@ -140,7 +140,7 @@ function getDeathMessage(player, sender){
             return ( sender + " was killed trying to hurt " + player);
             break;
         case 45:
-            return ( sender + " withered away")
+            return ( player + " withered away")
             break;
 
 

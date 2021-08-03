@@ -41,7 +41,7 @@ module.exports = class eightball extends Command {
         })
     }
 
-    run(msg, { user }) {
+    run(msg) {
         let embed = new MessageEmbed()
             .setTitle(msg.content.slice(7))
             .setDescription(getAnswer())

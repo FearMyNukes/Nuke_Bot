@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "discord-mongo-currency": "^1.0.4",
     "discord-reaction-role": "^2.1.0",
     "discord.js": "^12.4.1",
     "discord.js-commando": "git+https://github.com/discordjs/Commando.git",
