@@ -77,31 +77,7 @@ module.exports = class balance extends Command {
         })
       
 
-        
-
-
-
-
-
-
-    //     const sender = mongoCurrency.findUser(msg.author.id, msg.guild.id); // Get the user from the database.
-
-    //     if (talkedRecently.has(msg.author.id)) {
-    //         msg.channel.send(`Wait 1 minute before getting typing this again. ${msg.author.tag}`);
-    // } else {
-    //     mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins);
-    //     let embed = new MessageEmbed()
-    //         .setTitle("You begged and recieved " + randomCoins + " BottleCaps")
-    //         .setDescription("Total Balance now is: " + (sender.coinsInBank + sender.coinsInWallet))
-    //         .setColor("RANDOM")
-    //     msg.embed(embed)
-    //     talkedRecently.add(msg.author.id);
-    //     setTimeout(() => {
-    //       // Removes the user from the set after a minute
-    //       talkedRecently.delete(msg.author.id);
-    //     }, 60000);
-    // }
-
+  
     
     }
 }

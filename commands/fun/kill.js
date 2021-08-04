@@ -1,9 +1,16 @@
 const { Command } = require('discord.js-commando')
 const { MessageEmbed } = require('discord.js')
+const Currency = require("../../models/currency.js");
+const mongoose = require('mongoose');
+const Duration = require('humanize-duration')
+
+
+const randomDeath = Math.floor(Math.random() * 45);
+const used = new Map() //used for cooldown mapping
 
 
 function getDeathMessage(player, sender){
-    switch(Math.floor(Math.random() * 45)){
+    switch(randomDeath){
         case 0:
             return( player + " was shot by " + sender);
             break;
@@ -137,7 +144,7 @@ function getDeathMessage(player, sender){
             return ( player + " was poked to death by a sweet berry bush");
             break;
         case 44:
-            return ( sender + " was killed trying to hurt " + player);
+            return ( player + " was killed trying to hurt " + sender);
             break;
         case 45:
             return ( player + " withered away")
@@ -168,11 +175,64 @@ module.exports = class kill extends Command {
     }
 
     run(msg, { user }) {
-        var killer = msg.author;
-        let embed = new MessageEmbed()
-            .setTitle(getDeathMessage(`${user.tag}`.slice(0, -5), `${killer.tag}`.slice(0, -5)))
-            .setColor("RANDOM")
-        msg.embed(embed)
+
+
+
+        const cooldown = used.get(msg.author.id);
+
+        let profileData;
+        Currency.findOne({userID: user.id, guildID: msg.guild.id}).exec(function(err, currency){ //this part is the most crucial to getting this to work.
+        console.log(user.id);
+            if (!currency){
+                let profile = new Currency({
+                    userID: (user.id),
+                    guildID: (msg.guild.id),
+                    bankSize: 1000,
+                    workerSize: 3,
+                    bank: 0,
+                    wallet: 100,
+                    workerCount: 0,
+                    deathCount: 0
+                });
+    
+                profile.save();
+    
+                let embed = new MessageEmbed()
+                .setTitle(`${user.tag}`.slice(0, -5) + " Didn't have an account, I just made them one. Try again!")
+                .setColor("RANDOM")
+                msg.embed(embed)
+    
+            }else if (cooldown){
+
+                //replies to the user how much time is left on their cooldown
+
+                const remaining = Duration( cooldown -Date.now(), {units: ['m', 's'], round: true })
+                msg.reply(`You must wait ${remaining} before using this command!`);
+
+            
+            }else{
+
+                var killer = msg.author;
+                currency.deathCount = currency.deathCount + 1;
+                currency.save();
+                
+                let embed = new MessageEmbed()
+                    .setTitle(getDeathMessage(`${user.tag}`.slice(0, -5), `${killer.tag}`.slice(0, -5)))
+                    .setDescription(`${user.tag}`.slice(0, -5) + ` has a total of ${currency.deathCount}`)
+                    .setColor("RANDOM")
+                msg.embed(embed)
+
+                //adds a cooldown on the command for this user
+                used.set(msg.author.id, Date.now() + 1000 * 15);
+                setTimeout(() => used.delete(msg.author.id), 1000 * 15)
+
+            }
+
+
+        })
+      
+
+        
     
     }
 }
