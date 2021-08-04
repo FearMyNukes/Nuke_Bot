@@ -9,6 +9,7 @@
     "discord.js": "^12.4.1",
     "discord.js-commando": "git+https://github.com/discordjs/Commando.git",
     "erela.js": "^2.3.2",
+    "mongoose": "^5.13.5",
     "path": "^0.12.7",
     "random-words": "^1.1.1",
     "sqlite": "^4.0.10",

@@ -1,9 +1,9 @@
 const { Client } = require('discord.js-commando')
-const path = require('path')
-const mongoCurrency = require('discord-mongo-currency');
+const path = require('path');
 const config = require('./settings.json'); //setup this in the future buut basically it calls with config.token etc etc etc
+const mongoose = require('mongoose');
 
-mongoCurrency.connect(config.dbCONNECT);
+mongoose.connect(config.dbCONNECT);
 
 const client = new Client({
     //commandPrefix: '*',

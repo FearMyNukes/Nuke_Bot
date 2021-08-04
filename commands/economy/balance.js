@@ -12,33 +12,34 @@ module.exports = class giveCoins extends Command {
             group: 'economy',
             memberName: 'balance',
             description: 'Check your balance. ',
-            args: [
-                {
-                    type:"user",
-                    prompt:"Which user would you like to give coins to?",
-                    key:"user",
-                    default: msg => msg.author
-                }
+            // args: [
+            //     {
+            //         type:"user",
+            //         prompt:"Which user would you like to give coins to?",
+            //         key:"user",
+            //         default: msg => msg.author
+            //     }
                 // {
                 //     type:"integer",
                 //     prompt:"how many coins would you like to give?",
                 //     key:"amount",
                 // }
-            ]
+            // ]
         })
     }
 
-    run(msg, { user }) {
+    run(msg) {
 
-        var person = mongoCurrency.findUser(user.id,user.id); // Get the user from the database.
+        var person = mongoCurrency.findUser(msg.author.id,msg.guild.id); // Get the user from the database.
 
-        let embed = new MessageEmbed()
-            .setTitle(msg.author.tag.slice(0, -5) + '\'s Balance')
-            .setDescription(`Wallet: ${person.coinsInWallet}
-            Bank: ${person.coinsInBank}/${person.bankSpace}
-            Total: ${person.coinsInBank + person.coinsInWallet}`)
-            .setColor("RANDOM")
-        msg.embed(embed)
+        msg.say(`You have \`${person.coinsInWallet} \``)
+        // let embed = new MessageEmbed()
+        //     .setTitle(msg.author.tag.slice(0, -5) + '\'s Balance')
+        //     .setDescription(`Wallet: ${person.coinsInWallet}
+        //     Bank: ${person.coinsInBank}/${person.bankSpace}
+        //     Total: ${person.coinsInBank + person.coinsInWallet}`)
+        //     .setColor("RANDOM")
+        // msg.embed(embed)
         
 
     

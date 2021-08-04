@@ -1,2 +1,1 @@
-
-    ['misc', 'Misc'],
+const mongoose = require('mongoose');
