@@ -2,10 +2,11 @@ const { Command, CommandoMessage } = require('discord.js-commando')
 const { MessageEmbed } = require('discord.js')
 const Currency = require("../../models/currency.js");
 const mongoose = require('mongoose');
+const Duration = require('humanize-duration')
 
 
+const used = new Map() //used for cooldown mapping
 
-const talkedRecently = new Set();
 
 const randomCoins = Math.floor(Math.random() * 99) + 1; // Random amount of coins
 
@@ -18,24 +19,12 @@ module.exports = class balance extends Command {
             group: 'economy',
             memberName: 'beg',
             description: 'Beg for coins. ',
-
-            args: [
-                // {
-                //     type:"user",
-                //     prompt:"Which user would you like to give coins to?",
-                //     key:"user",
-                //     default: msg => msg.author
-                // }
-                // {
-                //     type:"integer",
-                //     prompt:"how many coins would you like to give?",
-                //     key:"amount",
-                // }
-            ]
         })
     }
 
     run(msg) {
+        const cooldown = used.get(msg.author.id);
+
         let profileData;
         Currency.findOne({userID: msg.author.id, guildID: msg.guild.id}).exec(function(err, currency){ //this part is the most crucial to getting this to work.
             if (!currency){
@@ -57,14 +46,14 @@ module.exports = class balance extends Command {
                 .setColor("RANDOM")
                 msg.embed(embed)
     
-                // .then(result => console.log(result));
-            }else if (talkedRecently.has(msg.author.id)){
+            }else if (cooldown){
 
-                msg.reply(`Wait 1 minute before getting typing this again.`)
-                    .then(msg=> { 
-                        setTimeout(()=> msg.delete(), 10000)
-                    })
+                //replies to the user how much time is left on their cooldown
 
+                const remaining = Duration( cooldown -Date.now(), {units: ['m', 's'], round: true })
+                msg.reply(`You must wait ${remaining} before using this command!`);
+
+            
             }else{
 
                 currency.wallet = currency.wallet + randomCoins;
@@ -76,12 +65,12 @@ module.exports = class balance extends Command {
                 msg.embed(embed)
 
                 currency.save();
+                
 
-                talkedRecently.add(msg.author.id);
-                setTimeout(() => {
-                // Removes the user from the set after a minute
-                talkedRecently.delete(msg.author.id);
-                }, 300000);
+                //adds a cooldown on the command for this user
+                used.set(msg.author.id, Date.now() + 1000 * 60);
+                setTimeout(() => used.delete(msg.author.id), 1000 * 60)
+
             }
 
 
