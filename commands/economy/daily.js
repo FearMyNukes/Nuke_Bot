@@ -21,8 +21,6 @@ module.exports = class daily extends Command {
 
     run(msg) {
         const cooldown = used.get(msg.author.id);
-
-        let profileData;
         Currency.findOne({userID: msg.author.id, guildID: msg.guild.id}).exec(function(err, currency){ //this part is the most crucial to getting this to work.
             if (!currency){
                 let profile = new Currency({

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Duration = require('humanize-duration')
 
 
-const randomDeath = Math.floor(Math.random() * 45);
+const randomDeath = Math.floor(Math.random() * 46);
 const used = new Map() //used for cooldown mapping
 
 
@@ -148,6 +148,9 @@ function getDeathMessage(player, sender){
             break;
         case 45:
             return ( player + " withered away")
+            break;
+        case 46:
+            return( player + " was NUKED")
             break;
 
 
