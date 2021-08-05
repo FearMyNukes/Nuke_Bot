@@ -34,7 +34,7 @@ client.registry
 
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}(${client.user.id})`)
-    client.user.setActivity('Try *c4 or *hangman | Under Development')
+    client.user.setActivity('Try *beg | Under Development')
 })
 
 client.on('error', console.error)
