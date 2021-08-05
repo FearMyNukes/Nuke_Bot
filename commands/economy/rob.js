@@ -77,11 +77,11 @@ module.exports = class rob extends Command {
                 
                 }else{
 
-                    var randomAmount = Math.floor(Math.random() * (currency.wallet * .5));
+                    var randomAmount = Math.floor(Math.random() * (robbed.wallet * .5));
 
                     currency.wallet = currency.wallet + randomAmount;
                     robbed.wallet = robbed.wallet - randomAmount;
-
+                    
                     let embed = new MessageEmbed()
                     .setTitle(`You stole ${randomAmount} from ${user.tag.slice(0,-5)}`)
                     .setThumbnail('https://webstockreview.net/images/crime-clipart-burgler-16.png')

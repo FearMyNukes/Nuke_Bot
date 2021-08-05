@@ -57,6 +57,7 @@ module.exports = class balance extends Command {
                 let embed = new MessageEmbed()
                 .setTitle("You begged and recieved " + randomCoins + " BottleCaps")
                 .setDescription(`Wallet Balance now is: ${currency.wallet.toLocaleString()}`)
+                .setThumbnail("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.freeiconspng.com%2Fuploads%2Fbegging-png-6.png&f=1&nofb=1")
                 .setColor("RANDOM")
                 msg.embed(embed)
 
