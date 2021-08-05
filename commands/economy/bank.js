@@ -19,11 +19,12 @@ module.exports = class bank extends Command {
 
     run(msg) {
         let profileData;
-        Currency.findOne({userID: msg.author.id, guildID: msg.guild.id}).exec(function(err, currency){ //this part is the most crucial to getting this to work.
+        Currency.findOne({userID: msg.author.id}).exec(function(err, currency){ //this part is the most crucial to getting this to work.
             if (!currency){
                 let profile = new Currency({
                     userID: (msg.author.id),
                     guildID: (msg.guild.id),
+                    username: (msg.author.tag).slice(0,-5),
                     bankSize: 1000,
                     workerSize: 3,
                     bank: 0,

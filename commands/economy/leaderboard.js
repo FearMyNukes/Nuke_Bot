@@ -17,7 +17,7 @@ module.exports = class leaderboard extends Command {
 
     run(msg) {
 
-        Currency.find({guildID: msg.guild.id}).sort([[("wallet" + "bank" ), 'descending']]).exec(function(err, results){ //this part is the most crucial to getting this to work.
+        Currency.find().sort([[("wallet" + "bank" ), 'descending']]).exec(function(err, results){ //this part is the most crucial to getting this to work.
 
             let embed = new MessageEmbed()
             .setTitle(`BottleCap LeaderBoard`)
@@ -30,25 +30,20 @@ module.exports = class leaderboard extends Command {
             }else if (results.length < 10){ //less than 10 results
                 embed.setColor("BLURPLE");
                 for ( let i= 0; i < results.length; i++){
-                    let member = msg.guild.members.cache.get(results[i].userID) || "User Left"
-                    if (member === "User Left"){
-                        embed.addField(`${i + 1}. ${member}`, `**BottleCaps**: ${(results[i].wallet + results[i].bank).toLocaleString()}`);
-                    }else{
-                        embed.addField(`${i + 1}. ${member.user.username}`, `**BottleCaps**: ${(results[i].wallet + results[i].bank).toLocaleString()}`);
-
-                    }
+                    
+                        embed.addField(`${i + 1}. ${results[i].username}`, `**BottleCaps**: ${(results[i].wallet + results[i].bank).toLocaleString()}`);
                 }
 
             }else{ //More than 10 results
                 embed.setColor("BLURPLE");
                 for ( i= 0; i < 10; i++){
-                    let member = msg.GuildMember.fetch(results[i].userID) || "User Left"
                     if (member === "User Left"){
-                        embed.addField(`${i + 1}. ${member}`, `**BottleCaps**: ${(results[i].wallet + results[i].bank).toLocaleString()}`);
-                    }else{
-                        embed.addField(`${i + 1}. ${member.user.username}`, `**BottleCaps**: ${(results[i].wallet + results[i].bank).toLocaleString()}`);
-
+                        embed.addField(`${i + 1}. ${results[i].username}`, `**BottleCaps**: ${(results[i].wallet + results[i].bank).toLocaleString()}`);
                     }
+                    // }else{
+                    //     embed.addField(`${i + 1}. ${results[i].username}`, `**BottleCaps**: ${(results[i].wallet + results[i].bank).toLocaleString()}`);
+
+                    // }
                 }
 
             }

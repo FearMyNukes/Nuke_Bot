@@ -23,11 +23,12 @@ module.exports = class deposit extends Command {
     }
 
     run(msg, {amount}) {
-        Currency.findOne({userID: msg.author.id, guildID: msg.guild.id}).exec(function(err, currency){
+        Currency.findOne({userID: msg.author.id}).exec(function(err, currency){
             if (!currency){
                 let profile = new Currency({
                     userID: (msg.author.id),
                     guildID: (msg.guild.id),
+                    username: (msg.author.tag).slice(0,-5),
                     bankSize: 1000,
                     workerSize: 3,
                     bank: 0,

@@ -27,12 +27,13 @@ module.exports = class rob extends Command {
     run(msg, { user }) {
         const cooldown = used.get(msg.author.id);
 
-        Currency.findOne({userID: msg.author.id, guildID: msg.guild.id}).exec(function(err, currency){ //this part is the most crucial to getting this to work.
-            Currency.findOne({userID: user.id, guildID: msg.guild.id}).exec(function(err, robbed){
+        Currency.findOne({userID: msg.author.id}).exec(function(err, currency){ //this part is the most crucial to getting this to work.
+            Currency.findOne({userID: user.id}).exec(function(err, robbed){
                 if (!currency){
                     let profile = new Currency({
                         userID: (msg.author.id),
                         guildID: (msg.guild.id),
+                        username: (msg.author.tag).slice(0,-5),
                         bankSize: 1000,
                         workerSize: 3,
                         bank: 0,
