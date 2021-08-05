@@ -4,13 +4,11 @@ const Currency = require("../../models/currency.js");
 const mongoose = require('mongoose');
 const Duration = require('humanize-duration')
 
-
-const randomDeath = Math.floor(Math.random() * 46);
 const used = new Map() //used for cooldown mapping
 
 
 function getDeathMessage(player, sender){
-    switch(randomDeath){
+    switch(Math.floor(Math.random() * 46)){
         case 0:
             return( player + " was shot by " + sender);
             break;
@@ -179,13 +177,9 @@ module.exports = class kill extends Command {
 
     run(msg, { user }) {
 
-
-
         const cooldown = used.get(msg.author.id);
 
-        let profileData;
         Currency.findOne({userID: user.id, guildID: msg.guild.id}).exec(function(err, currency){ //this part is the most crucial to getting this to work.
-        console.log(user.id);
             if (!currency){
                 let profile = new Currency({
                     userID: (user.id),
@@ -221,7 +215,7 @@ module.exports = class kill extends Command {
                 
                 let embed = new MessageEmbed()
                     .setTitle(getDeathMessage(`${user.tag}`.slice(0, -5), `${killer.tag}`.slice(0, -5)))
-                    .setDescription(`${user.tag}`.slice(0, -5) + ` has a total of ${currency.deathCount}`)
+                    .setDescription(`${user.tag}`.slice(0, -5) + ` has a total of ${currency.deathCount} Deaths`)
                     .setColor("RANDOM")
                 msg.embed(embed)
 

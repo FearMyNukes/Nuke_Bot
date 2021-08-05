@@ -4,18 +4,27 @@ const Currency = require("../../models/currency.js");
 const mongoose = require('mongoose');
 const Duration = require('humanize-duration')
 
-module.exports = class balance extends Command {
+
+module.exports = class bankupgrade extends Command {
     constructor(client) {
         super(client, {
-            name:"balance",
-            aliases: ["bal"],
+            name:"bankupgrade",
+            aliases: ["upgrade"],
             group: 'economy',
-            memberName: 'balance',
-            description: 'Check your balance. ',
+            memberName: 'bankupgrade',
+            description: 'Pay 500 Bottlecaps to increase your bank size by 100. ',
+            args: [ 
+                { 
+                    type:"integer",
+                    prompt:"How many Times would you like to upgrade your bank?",
+                    key:"amount",
+                    default: 1
+                }
+            ]
         })
     }
 
-    run(msg) {
+    run(msg, { amount}) {
 
         Currency.findOne({userID: msg.author.id, guildID: msg.guild.id}).exec(function(err, currency){ //this part is the most crucial to getting this to work.
             if (!currency){
@@ -37,19 +46,27 @@ module.exports = class balance extends Command {
                 .setColor("RANDOM")
                 msg.embed(embed)
     
-            }else{
-
-                let embed = new MessageEmbed()
-                .setTitle(msg.author.tag.slice(0, -5))
-                .setDescription(`
-                Your Wallet has: ${currency.wallet} BottleCaps
-                You Bank has: ${currency.bank} BottleCaps
-                `)
-                .setThumbnail(msg.author.displayAvatarURL())
+            }else if( (currency.wallet - (amount * 500 ) < 0)  ) {let embed = new MessageEmbed()
+                .setTitle("Insufficient Funds")
                 .setColor("RANDOM")
                 msg.embed(embed)
 
+            }else{
+
+                currency.wallet = currency.wallet - (amount * 500 );
+                currency.bankSize = currency.bankSize + ( amount * 100);
                 currency.save();
+
+                let embed = new MessageEmbed()
+                    .setTitle(`:fireworks: Bank Upgrade Successful :fireworks:`)
+                    .setDescription(`
+                    Max Bank size is now ${currency.bankSize}
+                    `)
+                    .setThumbnail(msg.author.displayAvatarURL())
+                    .setColor("RANDOM")
+                msg.embed(embed)
+
+                
 
             }
 

@@ -4,18 +4,26 @@ const Currency = require("../../models/currency.js");
 const mongoose = require('mongoose');
 const Duration = require('humanize-duration')
 
-module.exports = class deposit extends Command {
+
+
+//used to round the number up so users cannot cheat the system by withdrawing smaller amounts
+function roundUp(num, precision) {
+    precision = Math.pow(10, precision)
+    return Math.ceil(num * precision) / precision
+  }
+
+module.exports = class bwithdraw extends Command {
     constructor(client) {
         super(client, {
-            name:"deposit",
+            name:"withdraw",
             aliases: [],
             group: 'economy',
-            memberName: 'deposit',
-            description: 'Deposit an amount of coins to your bank.',
+            memberName: 'withdraw',
+            description: 'withdraw an amount of coins from your bank for a 2% fee.',
             args: [
                 {
                     type:"integer",
-                    prompt:"How many coins would you like to deposit?",
+                    prompt:"How many coins would you like to withdraw?",
                     key:"amount",
                 }
             ]
@@ -45,23 +53,17 @@ module.exports = class deposit extends Command {
     
             }else{
 
-                if (currency.wallet - amount < 0) { 
+                if (currency.bank - amount < 0) { 
                     let embed = new MessageEmbed()
-                        .setTitle("You do not have enough BottleCaps to do that")
-                        .setColor("RANDOM")
-                    msg.embed(embed);
-                }else if(currency.bank + amount > currency.bankSize){
-                    let embed = new MessageEmbed()
-                        .setTitle("You do not have enough Bank space left to do that")
-                        .setDescription("Do *bankUpgrade to add more space to your bank for a fee")
+                        .setTitle("You do not have enough BottleCaps in the bank to do that")
                         .setColor("RANDOM")
                     msg.embed(embed);
                 }else{                
 
-                    currency.wallet = currency.wallet - amount;
-                    currency.bank = currency.bank + amount;
+                    currency.wallet = currency.wallet + (amount - roundUp((amount*.02), 0) );
+                    currency.bank = currency.bank - amount;
                     let embed = new MessageEmbed()
-                        .setTitle(`You deposited ${amount} BottleCaps into your bank`)
+                        .setTitle(`You withdrew ${amount} BottleCaps from your bank`)
                         .setDescription(`
                         New bank balance: ${currency.bank}
                         New Wallet balance: ${currency.wallet}

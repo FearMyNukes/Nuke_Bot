@@ -4,12 +4,7 @@ const Currency = require("../../models/currency.js");
 const mongoose = require('mongoose');
 const Duration = require('humanize-duration')
 
-
 const used = new Map() //used for cooldown mapping
-
-
-const randomCoins = Math.floor(Math.random() * 99) + 1; // Random amount of coins
-
 
 module.exports = class balance extends Command {
     constructor(client) {
@@ -24,7 +19,7 @@ module.exports = class balance extends Command {
 
     run(msg) {
         const cooldown = used.get(msg.author.id);
-        
+
         Currency.findOne({userID: msg.author.id, guildID: msg.guild.id}).exec(function(err, currency){ //this part is the most crucial to getting this to work.
             if (!currency){
                 let profile = new Currency({
@@ -54,6 +49,8 @@ module.exports = class balance extends Command {
 
             
             }else{
+
+                var randomCoins = Math.floor(Math.random() * 99) + 1;
 
                 currency.wallet = currency.wallet + randomCoins;
 
