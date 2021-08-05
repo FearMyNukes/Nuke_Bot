@@ -65,8 +65,8 @@ module.exports = class bwithdraw extends Command {
                     let embed = new MessageEmbed()
                         .setTitle(`You withdrew ${amount} BottleCaps from your bank`)
                         .setDescription(`
-                        New bank balance: ${currency.bank}
-                        New Wallet balance: ${currency.wallet}
+                        New bank balance: ${currency.bank.toLocaleString()}
+                        New Wallet balance: ${currency.wallet.toLocaleString()}
                         `)
                         .setThumbnail(msg.author.displayAvatarURL())
                         .setColor("RANDOM")

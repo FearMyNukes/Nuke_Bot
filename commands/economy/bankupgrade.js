@@ -60,7 +60,7 @@ module.exports = class bankupgrade extends Command {
                 let embed = new MessageEmbed()
                     .setTitle(`:fireworks: Bank Upgrade Successful :fireworks:`)
                     .setDescription(`
-                    Max Bank size is now ${currency.bankSize}
+                    Max Bank size is now ${currency.bankSize.toLocaleString()}
                     `)
                     .setThumbnail(msg.author.displayAvatarURL())
                     .setColor("RANDOM")

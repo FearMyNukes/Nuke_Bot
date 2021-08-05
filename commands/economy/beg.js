@@ -56,7 +56,7 @@ module.exports = class balance extends Command {
 
                 let embed = new MessageEmbed()
                 .setTitle("You begged and recieved " + randomCoins + " BottleCaps")
-                .setDescription(`Wallet Balance now is: ${currency.wallet}`)
+                .setDescription(`Wallet Balance now is: ${currency.wallet.toLocaleString()}`)
                 .setColor("RANDOM")
                 msg.embed(embed)
 

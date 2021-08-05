@@ -42,8 +42,8 @@ module.exports = class balance extends Command {
                 let embed = new MessageEmbed()
                 .setTitle(msg.author.tag.slice(0, -5))
                 .setDescription(`
-                Your Wallet has: ${currency.wallet} BottleCaps
-                You Bank has: ${currency.bank} BottleCaps
+                Your Wallet has: ${currency.wallet.toLocaleString()} BottleCaps
+                You Bank has: ${currency.bank.toLocaleString()} BottleCaps
                 `)
                 .setThumbnail(msg.author.displayAvatarURL())
                 .setColor("RANDOM")

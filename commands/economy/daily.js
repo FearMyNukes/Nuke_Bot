@@ -56,7 +56,7 @@ module.exports = class daily extends Command {
                 let embed = new MessageEmbed()
                 .setTitle("You claimed your Daily reward for  " + (100 + (50 * (currency.workerCount + 1))) + " BottleCaps")
                 .setDescription(`
-                Wallet Balance now is: ${currency.wallet}
+                Wallet Balance now is: ${currency.wallet.toLocaleString()}
                 Tip: put that into your bank with *deposit [Amount]`)
                 .setColor("RANDOM")
                 msg.embed(embed)
