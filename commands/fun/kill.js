@@ -184,6 +184,7 @@ module.exports = class kill extends Command {
                 let profile = new Currency({
                     userID: (user.id),
                     guildID: (msg.guild.id),
+                    username: (user.id.tag).slice(0,-5),
                     bankSize: 1000,
                     workerSize: 3,
                     bank: 0,

@@ -17,7 +17,7 @@ module.exports = class leaderboard extends Command {
 
     run(msg) {
 
-        Currency.find().sort([[("wallet" + "bank" ), 'descending']]).exec(function(err, results){ //this part is the most crucial to getting this to work.
+        Currency.find().sort([[("wallet" + "bank" ), 'ascending']]).exec(function(err, results){ //this part is the most crucial to getting this to work.
 
             let embed = new MessageEmbed()
             .setTitle(`BottleCap LeaderBoard`)
@@ -30,20 +30,13 @@ module.exports = class leaderboard extends Command {
             }else if (results.length < 10){ //less than 10 results
                 embed.setColor("BLURPLE");
                 for ( let i= 0; i < results.length; i++){
-                    
                         embed.addField(`${i + 1}. ${results[i].username}`, `**BottleCaps**: ${(results[i].wallet + results[i].bank).toLocaleString()}`);
                 }
 
             }else{ //More than 10 results
                 embed.setColor("BLURPLE");
                 for ( i= 0; i < 10; i++){
-                    if (member === "User Left"){
-                        embed.addField(`${i + 1}. ${results[i].username}`, `**BottleCaps**: ${(results[i].wallet + results[i].bank).toLocaleString()}`);
-                    }
-                    // }else{
-                    //     embed.addField(`${i + 1}. ${results[i].username}`, `**BottleCaps**: ${(results[i].wallet + results[i].bank).toLocaleString()}`);
-
-                    // }
+                    embed.addField(`${i + 1}. ${results[i].username}`, `**BottleCaps**: ${(results[i].wallet + results[i].bank).toLocaleString()}`);
                 }
 
             }
