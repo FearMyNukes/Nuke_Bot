@@ -1,7 +1,0 @@
-{
-    "devTOKEN":"ODEwOTEyNjI1Mzg2NzE3MjI0.YCqjOw.X92AAF4dDb6ORtLv359rpD1NQ2s",
-    "mainTOKEN":"NjY2MDU3MjY5OTI2MDM1NDk0.XhuoKw.uEgOHhzfIiqttZpSzACaHw3FAjg",
-    "dbCONNECT":"mongodb+srv://admin:66jKcBqsQHby758@cluster0.4tu8v.mongodb.net/Nuke_bot?retryWrites=true&w=majority",
-    "dbUSER":"admin",
-    "dbPASS":"66jKcBqsQHby758"
-}
