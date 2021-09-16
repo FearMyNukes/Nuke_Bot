@@ -41,6 +41,7 @@ module.exports = class balance extends Command {
                 .setColor("RANDOM")
                 msg.embed(embed)
     
+                
             }else if (cooldown){
 
                 //replies to the user how much time is left on their cooldown

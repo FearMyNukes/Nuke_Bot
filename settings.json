@@ -1,5 +1,5 @@
 {
-    "devTOKEN":"ODEwOTEyNjI1Mzg2NzE3MjI0.YCqjOw.X92AAF4dDb6ORtLv359rpD1NQ2s",
+    "devTOKEN":"ODEwOTEyNjI1Mzg2NzE3MjI0.YCqjOw.0Oe8e50k8E5gWeWUDst76LlaZZY",
     "mainTOKEN":"NjY2MDU3MjY5OTI2MDM1NDk0.XhuoKw.6K7gpGoTLNzvVMUpdg2r4DBVcDM",
     "dbCONNECT":"mongodb://127.0.0.1:27017/nuke_bot?directConnection=true&serverSelectionTimeoutMS=2000",
     "dbUSER":"admin",
