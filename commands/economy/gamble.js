@@ -130,7 +130,7 @@ module.exports = class gamble extends Command {
                     }
                 }
 
-                if(payout > 0){
+                if(payout === 0){
                     let embed = new MessageEmbed()
                     .setTitle(`You Won! your payout of ${payout} Bottlecaps have been credited to your account`)
                     .setDescription(`Wallet Balance now is: ${currency.wallet.toLocaleString()}`)

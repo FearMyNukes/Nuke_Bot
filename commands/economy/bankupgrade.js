@@ -9,7 +9,7 @@ module.exports = class bankupgrade extends Command {
     constructor(client) {
         super(client, {
             name:"bankupgrade",
-            aliases: ["upgrade"],
+            aliases: [],
             group: 'economy',
             memberName: 'bankupgrade',
             description: 'Pay 500 Bottlecaps to increase your bank size by 100. ',

@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 mongoose.connect(config.dbCONNECT);
 
 const client = new Client({
-    //commandPrefix: '*',
-    commandPrefix: '$',
+    commandPrefix: '*',
+    //commandPrefix: '$',
     owner: ['476060721575362570'], // can be an array of ids like: owner: ["id", "id"] -
     invite: 'https://discord.gg/QUtyJyyD',
     unknownCommandResponse: false,
@@ -39,5 +39,5 @@ client.once('ready', () => {
 
 client.on('error', console.error)
 
-client.login(config.devTOKEN)
-//client.login(config.mainTOKEN)
+//Sclient.login(config.devTOKEN)
+client.login(config.mainTOKEN)
