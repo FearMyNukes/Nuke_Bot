@@ -2,7 +2,7 @@ const { Command, CommandoMessage } = require('discord.js-commando')
 const { MessageEmbed } = require('discord.js')
 
 function rollDice(){
-    return Math.floor(Math.random() * 6)
+    return Math.ceil(Math.random() * 6)
 }
 
 module.exports = class eightball extends Command {
