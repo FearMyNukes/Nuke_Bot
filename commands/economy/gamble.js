@@ -110,45 +110,56 @@ module.exports = class gamble extends Command {
                 
             }else{
 
-                currency.wallet = currency.wallet - bet;
-                
-                var payout; // Variable stroing the value of the game payout
-
-                if(game.toUpperCase() === "COINFLIP" || game.toUpperCase() === "CF" || game.toUpperCase() === "FLIP"){
-                    if (choice.toUpperCase() != "HEADS" || "TAILS"){
-                        payout = coinFlip(choice, bet);
-                    }
-
-                }else if(game.toUpperCase() === "ROULETTE"){
-                    if (choice.toUpperCase() != "GREEN" || "RED" || "BLACK"){
-                        payout = roulette(choice, bet);
-                    }
-                   
-                }else if (game.toUpperCase() === "DICE" || game.toUpperCase() === "ROLL" || game.toUpperCase() === "DIE"){
-                    if (Number.isInteger(choice) && 0 < choice < 7){
-                        payout = diceRoll(choice, bet);
-                    }
-                }
-
-                if(payout === 0){
+                if( currency.wallet - bet < 0){
                     let embed = new MessageEmbed()
-                    .setTitle(`You Won! your payout of ${payout} Bottlecaps have been credited to your account`)
-                    .setDescription(`Wallet Balance now is: ${currency.wallet.toLocaleString()}`)
-                    .setColor("RANDOM")
-                    msg.embed(embed)
-                }else if(payout > 0){
-                    currency.wallet = currency.wallet + payout;
+                    .setTitle(`You do not have enough bottlecaps to do that wager`)
 
-                    let embed = new MessageEmbed()
-                    .setTitle("You Lost! your Bottlecaps have been removed from your account")
-                    .setDescription(`Wallet Balance now is: ${currency.wallet.toLocaleString()}`)
-                    .setColor("RANDOM")
-                    msg.embed(embed)
                 }else{
-                    let embed = new MessageEmbed()
-                    .setTitle("There was a problem with your bet selection")
-                    .setColor("RANDOM")
-                    msg.embed(embed)
+
+                    currency.wallet = currency.wallet - bet;
+                    
+                    var payout; // Variable stroing the value of the game payout
+
+                    if(game.toUpperCase() === "COINFLIP" || game.toUpperCase() === "CF" || game.toUpperCase() === "FLIP"){
+                        if (choice.toUpperCase() != "HEADS" || "TAILS"){
+                            payout = coinFlip(choice, bet);
+                        }
+
+                    }else if(game.toUpperCase() === "ROULETTE"){
+                        if (choice.toUpperCase() != "GREEN" || "RED" || "BLACK"){
+                            payout = roulette(choice, bet);
+                        }
+                    
+                    }else if (game.toUpperCase() === "DICE" || game.toUpperCase() === "ROLL" || game.toUpperCase() === "DIE"){
+                        if (Number.isInteger(choice) && 0 < choice < 7){
+                            payout = diceRoll(choice, bet);
+                        }
+                    }
+
+                    if(payout === 0){
+                        let embed = new MessageEmbed()
+                        .setTitle(`You Lost! your bet of ${bet} Bottlecaps has been lost`)
+                        .setDescription(`Wallet Balance now is: ${currency.wallet.toLocaleString()}`)
+                        .setThumbnail("https://ggscore.com/media/logo/t62288.png?75")
+                        .setColor("RANDOM")
+                        msg.embed(embed)
+
+                    }else if(payout > 0){
+                        currency.wallet = currency.wallet + payout;
+
+                        let embed = new MessageEmbed()
+                        .setTitle(`You WON! your payout of ${payout} Bottlecaps has been credited to your account.`)
+                        .setDescription(`Wallet Balance now is: ${currency.wallet.toLocaleString()}`)
+                        .setThumbnail("https://toppng.com/public/uploads/thumbnail/view-pogger-pogchamp-emote-11563056054hofxhb4alo.png")
+                        .setColor("RANDOM")
+                        msg.embed(embed)
+                    }else{
+                        let embed = new MessageEmbed()
+                        .setTitle("There was a problem with your bet selection")
+                        .setDescription(`To play a game do *gamble [Roulette, Coinflip, Dice] [Green, Black, Red, Heads, Tails, #1-6] [Bet Amount]`)
+                        .setColor("RANDOM")
+                        msg.embed(embed)
+                    }
                 }
 
 
