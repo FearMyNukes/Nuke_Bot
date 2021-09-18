@@ -78,7 +78,7 @@ module.exports = class rob extends Command {
                 
                 }else{
                     
-                    let embed = new MessageEmbed();
+                    
 
                     switch(Math.floor(Math.random() * 4)){
                         case 0:
@@ -87,11 +87,12 @@ module.exports = class rob extends Command {
                             currency.wallet = currency.wallet + randomAmount;
                             robbed.wallet = robbed.wallet - randomAmount;
 
-
-                            embed.setTitle(`You stole ${randomAmount} from ${user.tag.slice(0,-5)}`)
-                            embed.setThumbnail('https://webstockreview.net/images/crime-clipart-burgler-16.png')
-                            embed.setDescription(`New wallet Balance: ${currency.wallet}`)
-                            embed.setColor("RANDOM")
+                            let embed = new MessageEmbed()
+                            .setTitle(`You stole ${randomAmount} from ${user.tag.slice(0,-5)}`)
+                            .setThumbnail('https://webstockreview.net/images/crime-clipart-burgler-16.png')
+                            .setDescription(`New wallet Balance: ${currency.wallet}`)
+                            .setColor("RANDOM")
+                            msg.embed(embed)
                             break;
 
                         case 1:
@@ -99,32 +100,35 @@ module.exports = class rob extends Command {
                             var randomAmount = Math.floor(Math.random() * (robbed.wallet * .5));
                             currency.wallet = currency.wallet + randomAmount;
                             robbed.wallet = robbed.wallet - randomAmount;
-                            let embed = new MessageEmbed()
 
-
-                            embed.setTitle(`You stole ${randomAmount} from ${user.tag.slice(0,-5)}`)
-                            embed.setThumbnail('https://webstockreview.net/images/crime-clipart-burgler-16.png')
-                            embed.setDescription(`New wallet Balance: ${currency.wallet}`)
-                            embed.setColor("RANDOM")
+                            let embed2 = new MessageEmbed()
+                            .setTitle(`You stole ${randomAmount} from ${user.tag.slice(0,-5)}`)
+                            .setThumbnail('https://webstockreview.net/images/crime-clipart-burgler-16.png')
+                            .setDescription(`New wallet Balance: ${currency.wallet}`)
+                            .setColor("RANDOM")
+                            msg.embed(embed2)
                             break;
 
                         case 2:
-                            
-                            embed.setTitle(`You got caught stealing from ${user.tag.slice(0,-5)} but they just got mad and you gave the money back and walked away in shame`)
-                            embed.setColor("RANDOM")
+
+                            let embed3 = new MessageEmbed()
+                            .setTitle(`You got caught stealing from ${user.tag.slice(0,-5)} but they just got mad and you gave the money back and walked away in shame`)
+                            .setThumbnail("https://cdn.frankerfacez.com/emoticon/262468/4")
+                            .setColor("RANDOM")
+                            msg.embed(embed3)
                             break;
                         default:
                             var randomAmount = Math.floor(Math.random() * (currency.wallet * .75));
                             currency.wallet = currency.wallet - randomAmount;
                             robbed.wallet = robbed.wallet + randomAmount;
 
-                            embed.setTitle(`You got caught stealing from ${user.tag.slice(0,-5)} and they sued you for ${randomAmount}`)
-                            embed.setThumbnail('http://www.clipartbest.com/cliparts/MTL/MGK/MTLMGK5ac.gif')
-                            embed.setDescription(`New wallet Balance: ${currency.wallet}`)
-                            embed.setColor("RANDOM")
+                            let embed4 = new MessageEmbed()
+                            .setTitle(`You got caught stealing from ${user.tag.slice(0,-5)} and they sued you for ${randomAmount}`)
+                            .setThumbnail('http://www.clipartbest.com/cliparts/MTL/MGK/MTLMGK5ac.gif')
+                            .setDescription(`New wallet Balance: ${currency.wallet}`)
+                            .setColor("RANDOM")
+                            msg.embed(embed4)
                     }
-
-                    msg.embed(embed)
 
                     currency.save();
                     robbed.save();
