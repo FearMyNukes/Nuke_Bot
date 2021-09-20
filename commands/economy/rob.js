@@ -127,7 +127,7 @@ module.exports = class rob extends Command {
                             .setThumbnail('http://www.clipartbest.com/cliparts/MTL/MGK/MTLMGK5ac.gif')
                             .setDescription(`New wallet Balance: ${currency.wallet}`)
                             .setColor("RANDOM")
-                            msg.embed(embed4)
+                            msg.embed(embed)
                     }
 
                     currency.save();
