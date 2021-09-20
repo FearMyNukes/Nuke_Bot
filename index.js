@@ -1,3 +1,11 @@
+/* 
+
+    Required Imports:
+        Discord.js-commando
+        mongoose
+        axios cheerio puppeteer
+*/
+
 const { Client } = require('discord.js-commando')
 const path = require('path');
 const config = require('./settings.json'); //setup this in the future buut basically it calls with config.token etc etc etc
@@ -34,10 +42,10 @@ client.registry
 
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}(${client.user.id})`)
-    client.user.setActivity('Try *beg | Under Development')
+    client.user.setActivity('Try *crypto | Under Development')
 })
 
 client.on('error', console.error)
 
-//Sclient.login(config.devTOKEN)
+//client.login(config.devTOKEN)
 client.login(config.mainTOKEN)
